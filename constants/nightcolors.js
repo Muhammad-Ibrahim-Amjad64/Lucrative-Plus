@@ -1,5 +1,5 @@
 
-
+// abhi ye day color ka backup 
 // import {flag} from "../utils/flag";
 export const GlobalStyles = {
     colors: {
@@ -16,9 +16,7 @@ export const GlobalStyles = {
       error50: '#fcc4c4',
       error500: '#9b095c',
       gray500: '#39324a',
-      // gray700: '#221c30',
-    gray700: '#141D26',
-      
+      gray700: '#221c30',
     },
   };
   
