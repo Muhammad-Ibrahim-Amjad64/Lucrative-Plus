@@ -13,8 +13,8 @@ function CustomDrawer(props) {
         contentContainerStyle={{ backgroundColor: "#131313" }}
           >
               <ImageBackground source={require("../../assets/background.png")} style={{ padding: 30 }}>
-                  <Image source={require("../../assets/Logo.png")} style={styles.image}></Image>
-                  <Text style={styles.title}>Lucrative Plus</Text>
+                  <Image source={require("../../assets/Logo.jpg")} style={styles.image}></Image>
+                  <Text style={styles.title}>UBIT Community</Text>
                 </ImageBackground>
         <DrawerItemList {...props} />
       </DrawerContentScrollView>

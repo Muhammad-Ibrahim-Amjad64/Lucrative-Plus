@@ -1,6 +1,6 @@
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View } from "react-native";
-import {LinearGradient} from "expo-linear-gradient"
+
 import { GlobalStyles } from "./constants/colors";
 import { NavigationContainer } from "@react-navigation/native";
 // import { createNativeStackNavigator } from "@react-navigation/native-stack";
@@ -11,45 +11,52 @@ import { FontAwesome } from "@expo/vector-icons";
 import { useState, useEffect, useContext } from "react";
 
 import MainScreen from "./screens/MainScreen";
-import ManageTasks from "./screens/ManageTasks";
-import ReleaseStress from "./screens/ReleaseStress";
+import OtherStudents from "./screens/OtherStudents";
+import FeedBack from "./screens/Feedback";
+import Profile from "./screens/Profile";
 import LaunchingScreen from "./screens/LaunchingScreen";
+
+
+import LoadingOverlay from "./components/UI/LoadingOverlay";
 import ModeContextProvider from "./store/ModeContextProvider";
 import CustomDrawer from "./components/UI/CustomDrawer";
+import { useFonts } from 'expo-font';
 import { Ionicons } from "@expo/vector-icons";
+import { MaterialIcons } from '@expo/vector-icons'
 
 
-import Profile from "./screens/Profile";
+
 
 
 const BottomTabs = createBottomTabNavigator();
 const Drawer = createDrawerNavigator();
 
+
+
 const DrawerElements = () => {
   return (
     <Drawer.Navigator drawerContent={props => <CustomDrawer {...props}  />}
-      screenOptions={{
-     
-        
+      screenOptions={{   
         drawerInactiveTintColor:"white",
         // drawerInactiveBackgroundColor:"#f1efef",
         drawerActiveTintColor: "#d5b1ff" ,   // active walay ka color 
-        drawerStyle: { backgroundColor: "#ffffff" },
+        drawerStyle: { backgroundColor: "#121212" },
         drawerActiveBackgroundColor:"#3f3f3f" ,  // jaisay stack mn content style tha
      
-        headerTitle: "Lucrative Plue",
+        
         headerTintColor: GlobalStyles.colors.primary800,
         headerStyle: { backgroundColor: GlobalStyles.colors.primary500 },
       }}
     >
-      <Drawer.Screen name="Home" component={MainScreen}></Drawer.Screen>
-      <Drawer.Screen name="Profile" component={Profile}></Drawer.Screen>
+      <Drawer.Screen options={{headerTitle: "Home"}} name="Home" component={MainScreen}></Drawer.Screen>
+      <Drawer.Screen options={{headerTitle: "Profile"}}  name="Profile" component={Profile}></Drawer.Screen>
       <Drawer.Screen options={
         {
-          sceneContainerStyle:{backgroundColor:"grey"},
+          headerTitle: "Help& feedback",
+          sceneContainerStyle:{backgroundColor:"#fbfbfb"},
           
         }
-      } name="ManageTasks" component={ManageTasks}></Drawer.Screen>
+      } name="Help& feedback" component={FeedBack}></Drawer.Screen>
     </Drawer.Navigator>
   );
 };
@@ -57,6 +64,10 @@ const DrawerElements = () => {
 
 export default function App() {
   const [launching, setLaunching] = useState(true);
+  const [fontsLoaded] = useFonts({
+    'Playfairdisplay': require('./utils/PlayfairDisplaySC-Bold.otf'),
+   
+  });
 
 
   useEffect(() => {
@@ -69,6 +80,12 @@ export default function App() {
 
   if (launching) {
     return <LaunchingScreen />;
+  }
+
+
+
+  if (!fontsLoaded) {
+    return <LoadingOverlay />;
   }
 
   return (
@@ -88,7 +105,7 @@ export default function App() {
               headerLeft: () => (
                 <FontAwesome name="user-circle-o" size={24} color="grey" />
               ),
-              headerTitle: "Lucrative Plue",
+              headerTitle: "University of karachi students",
               
             }}
           >
@@ -109,10 +126,10 @@ export default function App() {
             <BottomTabs.Screen
               options={{
                 tabBarIcon: ({ color, size }) => (
-                  <Ionicons name="happy-outline" size={size} color={color} />),
+                  <MaterialIcons name="groups" size={size} color={color} />),
             }}
-              name="Release Stress"
-              component={ReleaseStress}
+              name="Students"
+              component={OtherStudents}
             ></BottomTabs.Screen>
    
           </BottomTabs.Navigator>

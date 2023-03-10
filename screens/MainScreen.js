@@ -1,7 +1,7 @@
 import { useNavigation } from "@react-navigation/native";
 import React from "react";
-import { Text, View, StyleSheet, Button, Pressable } from "react-native";
-useNavigation;
+import { Text, View, StyleSheet, Button, Pressable,Image } from "react-native";
+
 import { useLayoutEffect } from "react";
 import { GlobalStyles } from "../constants/colors";
 import { Ionicons } from "@expo/vector-icons";
@@ -9,22 +9,13 @@ import { useContext } from "react";
 import { Octicons } from "@expo/vector-icons";
 import modeContext from "../store/mode-Context";
 import { IconButton } from "react-native-paper";
+import { DUMMY_Data } from "../assets/data/dummy-Data";
 
 import TaskList from "../components/TaskList";
 
-// import {Ionicons} from ""
-const DUMMY_Task = [
-  {
-    id: "e1",
-    title: "Gym",
-    description: "Warzish krni ha ",
-    sheduledTime: 30,
-    type: "oneTime",
-    days:'Empty',
-    date: new Date("2022-02-18").toLocaleDateString(),
-  },
 
-];
+// import {Ionicons} from ""
+
 
 const MainScreen = (props) => {
   const ctx = useContext(modeContext);
@@ -67,33 +58,58 @@ const MainScreen = (props) => {
   };
   return (
     <View style={styles.screen}>
-    
+      <View style={styles.container}>
+        {/* <TaskList TaskList={DUMMY_Data} ></TaskList> */}
+        <View style={styles.imageContainer} >
+            <Image style={styles.image}
+          source={require("../assets/Logo.jpg")}
+          ></Image>
+          </View>
+          <Text style={styles.title}>Welcome!</Text>
+        {/* <Text style={styles.titleStyle}>To the UBIT Community</Text> */}
+      </View>
 
       <View>
-          <TaskList TaskList={DUMMY_Task} ></TaskList>
-        <View style={styles.addNewTask}>
-         
-          <IconButton
-    icon="plus"
-    iconColor={"#ffffff"}
-    containerColor={"#24003d"}
-    size={30}
-    onPress={() => {
-      navigation.navigate("ManageTasks");
-    }}
-  />
-          
-        </View>
-    
+        {/* <Text>upcoming Events!</Text> */}
+        <TaskList  TaskList={DUMMY_Data}></TaskList>
       </View>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
+  container: {
+    alignItems:"center"
+  },
+  
+  imageContainer: {
+    width:  150,
+    height:  150,
+    borderRadius: 14,
+    // borderWidth: 3,
+    // borderColor: Colors.primary800,
+    overflow: 'hidden',
+    margin: 36,
+  },
+  image: {
+    width: '100%',
+    height: '100%',
+  },inputContainer: {
+    marginHorizontal: 4,
+    marginVertical: 8
+  },
+  titleStyle: {
+    borderBottomColor: "#d8d8d8",
+    borderBottomWidth:1,
+    marginTop: 12,
+    fontWeight:"bold"
+  },
   title: {
+    color:"#5c36a1",
     fontWeight: "bold",
-    // fontSize:40
+    fontSize: 20,
+   
+  
   },
   addNewTask: {
     flexDirection: "row",
@@ -110,6 +126,8 @@ const styles = StyleSheet.create({
     padding: 20,
     // justifyContent: "center",
     alignItems: "center",
+    justifyContent:"space-between"
+    // justifyContent:"center"
   },
   info: {
     padding: 8,
